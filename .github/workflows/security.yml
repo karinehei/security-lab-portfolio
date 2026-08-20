@@ -109,13 +109,20 @@ jobs:
       - name: Docker image build
         run: docker build -t security-lab-api:${{ github.sha }} ./web-api-security/vulnerable-api
 
+      # Run Trivy as a pinned container, same pattern as Semgrep/Gitleaks.
+      # aquasecurity/trivy-action@0.29.0 no longer resolves: unprefixed tags
+      # (0.0.1–0.34.2) were removed after the March 2026 tag-poisoning incident.
       - name: Trivy container scan
-        uses: aquasecurity/trivy-action@0.29.0
-        with:
-          image-ref: security-lab-api:${{ github.sha }}
-          format: table
-          exit-code: "1"
-          ignore-unfixed: true
-          vuln-type: os,library
-          severity: CRITICAL
-          trivyignores: devsecops/trivy/.trivyignore
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$GITHUB_WORKSPACE:/src" \
+            aquasec/trivy:0.70.0 image \
+            --severity CRITICAL \
+            --ignore-unfixed \
+            --exit-code 1 \
+            --scanners vuln \
+            --pkg-types os,library \
+            --ignorefile /src/devsecops/trivy/.trivyignore \
+            --format table \
+            "security-lab-api:${{ github.sha }}"

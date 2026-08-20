@@ -15,7 +15,7 @@ On push and pull request to `main`:
 7. API `npm run audit:ci`
 8. Gitleaks with [`gitleaks.toml`](../gitleaks/gitleaks.toml)
 9. `docker build` of the lab API
-10. Trivy (Critical + fix available → fail)
+10. Trivy image scan via `aquasec/trivy:0.70.0` (Critical + fix available → fail)
 
 No workflow file contains live credentials. Lab placeholders match `.env.example` and the Gitleaks allowlist.
 
