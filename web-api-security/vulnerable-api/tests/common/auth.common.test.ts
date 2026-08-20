@@ -10,6 +10,21 @@ describe("GET /health and authentication", () => {
     expect(response.body.labMode).toBe(getLabMode());
   });
 
+  it("returns HTML from /health when the client is a browser", async () => {
+    const response = await request(app)
+      .get("/health")
+      .set("Accept", "text/html")
+      .expect(200);
+    expect(response.text).toContain("vulnerable-api health");
+    expect(response.text).toContain(getLabMode());
+  });
+
+  it("describes the API at GET / so a browser is not a 404", async () => {
+    const response = await request(app).get("/").expect(200);
+    expect(response.body.health).toBe("/health");
+    expect(response.body.labMode).toBe(getLabMode());
+  });
+
   it("issues a token for a seeded lab user", async () => {
     const token = await login("alice@local.lab");
     const me = await request(app)

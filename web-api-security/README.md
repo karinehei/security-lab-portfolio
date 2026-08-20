@@ -2,6 +2,8 @@
 
 Local labs for authorization, authentication, and OWASP-aligned API defects. All targets are applications in this folder, started on localhost.
 
+From the repository root (WSL): `make up` — API on `http://127.0.0.1:3000`. Full start, accounts, and host-run steps: [vulnerable-api README](./vulnerable-api/README.md) and the root [Run locally](../README.md#run-locally) section.
+
 ## Implemented
 
 | Lab | Focus | Report |

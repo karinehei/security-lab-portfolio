@@ -48,7 +48,58 @@ Detail: [docs/methodology.md](./docs/methodology.md). Scope: [SECURITY.md](./SEC
 
 Full inventory: [skills.md](./skills.md) (rows without artefacts stay **Planned**).
 
-From WSL at the repository root, `make help` lists install, test, Compose, and scanner targets.
+---
+
+## Run locally
+
+This is a **localhost lab**. Do not bind it to a public interface or deploy the images.
+
+**Need:** WSL (Ubuntu), Docker, Node.js 22+. On Windows, open WSL first.
+
+```powershell
+wsl -d Ubuntu-24.04
+```
+
+```bash
+cd /mnt/d/security-lab-portfolio
+make up
+```
+
+That starts the document API and Postgres on loopback. Compose default is `LAB_MODE=vulnerable`.
+
+| What | Where |
+| --- | --- |
+| API (no HTML UI) | `http://127.0.0.1:3000/` → JSON index |
+| Health | `http://127.0.0.1:3000/health` → `"labMode": "vulnerable"` |
+| Postgres | `127.0.0.1:5432` (user/password/db: `lab` / `lab` / `documents_lab`) |
+
+```bash
+curl http://127.0.0.1:3000/health
+```
+
+If the editor Simple Browser looks blank, that is JSON in a viewer that does not paint it. Use `curl`, tick Pretty-print, or open the URL in Chrome. After a rebuild, browsers that send `Accept: text/html` get a short HTML page.
+
+Secure mode: `make up-secure`. Stop: `make down`.
+
+Seeded accounts (password for all: `LabPassw0rd!`): `alice@local.lab`, `bob@local.lab`, `admin@local.lab`.
+
+```bash
+curl -s http://127.0.0.1:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"alice@local.lab","password":"LabPassw0rd!"}'
+```
+
+Host API with Postgres in Docker: `make setup` then `make api-dev`.
+
+RAG lab has no HTTP listener:
+
+```bash
+cd ai-security-lab && npm install
+LAB_MODE=vulnerable npx tsx src/index.ts --user alice --query merger
+LAB_MODE=secure npx tsx src/index.ts --user alice --query merger
+```
+
+`make help` lists install, tests, and scanners. Detail: [vulnerable-api README](./web-api-security/vulnerable-api/README.md), [ai-security-lab README](./ai-security-lab/README.md). If Docker pull fails with a credentials error, retry with `DOCKER_CONFIG=/tmp/empty-docker`.
 
 ---
 

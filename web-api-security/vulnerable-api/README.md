@@ -24,13 +24,14 @@ Node.js, TypeScript, Express, PostgreSQL, Prisma, Docker Compose, Vitest.
 
 | Method | Path | Auth | Notes |
 | --- | --- | --- | --- |
+| `GET` | `/` | No | JSON index (no HTML UI) |
+| `GET` | `/health` | No | `{ status, labMode }` |
 | `POST` | `/api/auth/login` | No | Body `{ "email", "password" }` → JWT |
 | `GET` | `/api/me` | Bearer | Current user (no password hash) |
 | `GET` | `/api/documents` | Bearer | Caller's documents (`ADMIN` sees all). **Not** the IDOR surface |
 | `GET` | `/api/documents/:id` | Bearer | **IDOR training surface** in vulnerable mode |
 | `POST` | `/api/documents` | Bearer | Creates a document owned by the caller |
 | `GET` | `/api/admin/users` | Bearer + `ADMIN` | User directory, no hashes |
-| `GET` | `/health` | No | `{ status, labMode }` |
 
 ## Lab accounts
 
