@@ -24,8 +24,8 @@ Node.js, TypeScript, Express, PostgreSQL, Prisma, Docker Compose, Vitest.
 
 | Method | Path | Auth | Notes |
 | --- | --- | --- | --- |
-| `GET` | `/` | No | JSON index (no HTML UI) |
-| `GET` | `/health` | No | `{ status, labMode }` |
+| `GET` | `/` | No | JSON index (no HTML UI). Browser view: [screenshot](../../docs/images/vulnerable-api-index.png) |
+| `GET` | `/health` | No | `{ status, labMode }`. Browser view: [screenshot](../../docs/images/vulnerable-api-health.png) |
 | `POST` | `/api/auth/login` | No | Body `{ "email", "password" }` → JWT |
 | `GET` | `/api/me` | Bearer | Current user (no password hash) |
 | `GET` | `/api/documents` | Bearer | Caller's documents (`ADMIN` sees all). **Not** the IDOR surface |

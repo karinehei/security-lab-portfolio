@@ -58,7 +58,19 @@ The retriever may only rank documents for which `canRetrieveDocument(actor, doc)
 | `LAB_MODE=secure`, Alice + `compensation` | Alice’s own document still retrieved |
 | `LAB_MODE=secure`, admin + `merger` | Admin may retrieve Bob’s document |
 
-Evidence: [tests/rag-access-control.secure.test.ts](../../tests/rag-access-control.secure.test.ts), [tests/rag-access-control.vulnerable.test.ts](../../tests/rag-access-control.vulnerable.test.ts).
+**Vulnerable mode — Alice retrieves Bob’s object**
+
+`LAB_MODE=vulnerable npx tsx src/index.ts --user alice --query merger`: `retrievedDocumentIds` includes `doc-bob-merger`; the mock answer contains `MARKER_BOB_PRIVATE_MERGER`.
+
+![Alice query merger in LAB_MODE=vulnerable retrieves Bob’s private merger document](../../../docs/images/rag-acl-001-vulnerable-alice-merger.png)
+
+**Secure mode — same query**
+
+`LAB_MODE=secure npx tsx src/index.ts --user alice --query merger`: `retrievedDocumentIds` is empty; answer is `No authorised documents matched the query "merger".`
+
+![Alice query merger in LAB_MODE=secure returns no authorised documents](../../../docs/images/rag-acl-001-secure-alice-merger.png)
+
+Automated evidence: [tests/rag-access-control.secure.test.ts](../../tests/rag-access-control.secure.test.ts), [tests/rag-access-control.vulnerable.test.ts](../../tests/rag-access-control.vulnerable.test.ts).
 
 ## Impact
 

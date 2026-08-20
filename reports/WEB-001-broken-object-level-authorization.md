@@ -134,9 +134,13 @@ Alice's `GET /api/documents` still lists only Alice's rows in both modes. The de
 
 ## Evidence
 
-No screenshots. The following are representative local responses (document ids vary after additional `POST`s; use the id from step 3).
+Local capture, `127.0.0.1` only. Document ids can change after extra `POST`s; this run used seeded id `3`.
 
 **Vulnerable mode — Alice reads Bob's object**
+
+Alice's JWT, `GET /api/documents/3`: **200**, `X-Lab-Mode: vulnerable`, Bob's merger `content`, `ownerId: 2`.
+
+![Alice (Bearer) GET /api/documents/3 returns 200 and Bob's document in LAB_MODE=vulnerable](../docs/images/web-001-vulnerable-alice-reads-bob.png)
 
 ```http
 HTTP/1.1 200 OK
@@ -156,6 +160,10 @@ Content-Type: application/json
 `ownerId` is Bob's user id while the Bearer token is Alice's. That single mismatch is the finding.
 
 **Secure mode — same request**
+
+Same Alice token pattern, `GET /api/documents/3`: **403**, `X-Lab-Mode: secure`, no document `content`.
+
+![Alice (Bearer) GET /api/documents/3 returns 403 in LAB_MODE=secure](../docs/images/web-001-secure-alice-denied-bob.png)
 
 ```http
 HTTP/1.1 403 Forbidden

@@ -33,6 +33,10 @@ Trivy container scan
 Canonical workflow: [`.github/workflows/security.yml`](../.github/workflows/security.yml)  
 Local notes: [`ci/README.md`](./ci/README.md)
 
+Successful runs of that workflow on `main` (GitHub Actions, filter `is:success`):
+
+![GitHub Actions Security workflow — successful runs on main](../docs/images/github-actions-security-pipeline.png)
+
 ## What “fail the build” means
 
 | Check | Fails CI when | Does not fail CI when |

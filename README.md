@@ -10,7 +10,7 @@ Local labs only. Intentionally vulnerable code is labelled `LAB VULNERABILITY`, 
 | --- | --- | --- | --- |
 | [vulnerable-api](./web-api-security/vulnerable-api) | **Web/API security** | Broken access control (IDOR / BOLA), authentication and JWT sessions, REST assessment, OWASP API1 / A07 / API2 | [WEB-001](./reports/WEB-001-broken-object-level-authorization.md) · [WEB-002](./reports/WEB-002-authentication-security.md) · [secure tests](./web-api-security/vulnerable-api/tests/secure) |
 | Same lab, `LAB_MODE=secure` | **Security engineering** | Vulnerability remediation, secure coding, automated regression testing | [`documentAuthz.ts`](./web-api-security/vulnerable-api/src/authz/documentAuthz.ts) · [`authService.ts`](./web-api-security/vulnerable-api/src/services/authService.ts) · `npm run test:all` |
-| [devsecops](./devsecops) + [security.yml](./.github/workflows/security.yml) | **DevSecOps** | Semgrep SAST, Gitleaks, Trivy, npm audit, CI/CD gates | [expected findings](./devsecops/semgrep/expected-findings.md) · [exceptions](./devsecops/exceptions.md) |
+| [devsecops](./devsecops) + [security.yml](./.github/workflows/security.yml) | **DevSecOps** | Semgrep SAST, Gitleaks, Trivy, npm audit, CI/CD gates | [expected findings](./devsecops/semgrep/expected-findings.md) · [exceptions](./devsecops/exceptions.md) · [green `security.yml` runs](./docs/images/github-actions-security-pipeline.png) |
 | [tryhackme](./tryhackme) | **Hands-on training** | TryHackMe note structure, CTF-style *controlled* exercises (this repo’s labs) | [progress.md](./tryhackme/progress.md) — **no rooms marked complete**; profile TODO: `https://tryhackme.com/p/<USERNAME>` |
 | [ai-security-lab](./ai-security-lab) | **AI security** | RAG document-level access control, prompt-injection *concepts*, sensitive-data exposure via retrieval, threat modelling | [RAG-ACL-001](./ai-security-lab/scenarios/rag-access-control/README.md) · [threat-model.md](./ai-security-lab/threat-model.md) · [tests](./ai-security-lab/tests) |
 
@@ -77,7 +77,13 @@ That starts the document API and Postgres on loopback. Compose default is `LAB_M
 curl http://127.0.0.1:3000/health
 ```
 
-If the editor Simple Browser looks blank, that is JSON in a viewer that does not paint it. Use `curl`, tick Pretty-print, or open the URL in Chrome. After a rebuild, browsers that send `Accept: text/html` get a short HTML page.
+If the editor Simple Browser looks blank, that is JSON in a viewer that does not paint it. Use `curl`, tick Pretty-print, or open the URL in Chrome. After a rebuild, browsers that send `Accept: text/html` get a short HTML page:
+
+![Browser at http://127.0.0.1:3000/ — JSON index with labMode vulnerable](./docs/images/vulnerable-api-index.png)
+
+`labMode` here is `vulnerable` because that is the Compose default. Click `/health` on that page, or open `http://127.0.0.1:3000/health`:
+
+![Browser at http://127.0.0.1:3000/health — status ok, labMode vulnerable](./docs/images/vulnerable-api-health.png)
 
 Secure mode: `make up-secure`. Stop: `make down`.
 

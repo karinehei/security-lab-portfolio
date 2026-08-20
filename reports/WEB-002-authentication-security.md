@@ -115,9 +115,13 @@ Do not use this pattern against any other host. The minting helper exists only i
 
 ## Evidence
 
-No screenshots.
+Local captures, `127.0.0.1` only. Do not paste live tokens into chat or public JWT debuggers; this lab secret is fictional.
 
-**Vulnerable login (representative)**
+**Vulnerable login**
+
+`POST /api/auth/login` as Alice: `"expiresInSeconds": null`.
+
+![Alice login in LAB_MODE=vulnerable — expiresInSeconds is null](../docs/images/web-002-vulnerable-login.png)
 
 ```http
 HTTP/1.1 200 OK
@@ -131,7 +135,11 @@ Content-Type: application/json
 }
 ```
 
-**Secure login (representative)**
+**Secure login**
+
+Same request after `make up-secure`: `"expiresInSeconds": 900`. Local Base64url decode of the payload shows `exp` (about 15 minutes after `iat`).
+
+![Alice login in LAB_MODE=secure — expiresInSeconds 900 and JWT payload includes exp](../docs/images/web-002-secure-login.png)
 
 ```http
 HTTP/1.1 200 OK

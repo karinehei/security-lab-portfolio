@@ -49,7 +49,7 @@ LAB_MODE=vulnerable npx tsx src/index.ts --user alice --query merger
 LAB_MODE=secure npx tsx src/index.ts --user alice --query merger
 ```
 
-Secure mode should omit Bob’s marker `MARKER_BOB_PRIVATE_MERGER`. Vulnerable mode includes it.
+Secure mode should omit Bob’s marker `MARKER_BOB_PRIVATE_MERGER`. Vulnerable mode includes it. Terminal captures: [RAG-ACL-001 Evidence](./scenarios/rag-access-control/README.md#observed-behaviour).
 
 ## Layout
 
