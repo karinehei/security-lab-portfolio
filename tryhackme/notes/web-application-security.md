@@ -7,7 +7,7 @@ Placeholder track — **not completed**. Replace this with a specific TryHackMe 
 | **Room / module** | TODO: official room title (for example a TryHackMe web application path module) |
 | **Date** | TODO: YYYY-MM-DD |
 | **Status** | **Planned** |
-| **TryHackMe profile** | TODO: `https://tryhackme.com/p/<USERNAME>` |
+| **TryHackMe profile** | [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei) |
 | **Evidence** | None yet — do not treat this file as a completion |
 
 ## Topics
@@ -49,5 +49,5 @@ The lab is independent of TryHackMe. Completing a THM web room later should **ci
 
 ## Evidence / profile link
 
-- Profile: TODO: `https://tryhackme.com/p/<USERNAME>`
+- Profile: [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei)
 - This track: Planned — see [progress.md](../progress.md)

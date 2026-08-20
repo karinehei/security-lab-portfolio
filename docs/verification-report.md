@@ -27,7 +27,7 @@ Results use only **PASS**, **FAIL**, or **NOT IMPLEMENTED**. Failures found duri
 | No real credentials or secrets | PASS | Pattern grep (AWS/GitHub/OpenAI/Slack-style keys) on repo files excluding `node_modules`: **none**. Gitleaks exit 0. `.env` is gitignored; `.env.example` uses fictional lab values | Placeholders only. Do not reuse them outside this lab. |
 | Security tests do not contact external systems | PASS | API tests use Supertest against the in-process Express app + local Postgres. RAG tests call in-process `ask()`. No `fetch` / HTTP client in `src/` or `tests/` of either lab | Vitest talks to `127.0.0.1` Postgres from `.env`, not to vendor APIs. Scanner images pulling vulnerability DBs is tooling, not a lab test. |
 | GitHub Actions configuration is valid | PASS | `.github/workflows/security.yml` loads as YAML: job `security`, 15 named steps (checkout, Node 20, Prisma, typecheck, `test:all` both labs, Semgrep policy + coverage, npm audit, Gitleaks, Docker build, Trivy CRITICAL). `permissions: contents: read`. No live secrets in the file | PyYAML maps the key `on` to boolean `True` (GitHub still accepts `on:`). Semgrep steps now use `--entrypoint semgrep`. Image pin `1.128.1` was not verified by a local pull. |
-| README does not exaggerate skills or completed exercises | PASS | Evidence table points at artefacts. TryHackMe: **no rooms complete**, profile TODO. Prompt injection: evaluation design, not a model assessment. No certs or scores | Tagline originally said “AI/LLM security evaluation”; it now says “local RAG access-control labs”. `skills.md` keeps Planned rows without artefacts. |
+| README does not exaggerate skills or completed exercises | PASS | Evidence table points at artefacts. TryHackMe: four **intro** rooms documented (snapshot 20 Aug 2026); public profile `https://tryhackme.com/p/karinehei`. Prompt injection: evaluation design, not a model assessment. No certs or scores | Tagline originally said “AI/LLM security evaluation”; it now says “local RAG access-control labs”. `skills.md` keeps Planned rows without artefacts. |
 
 ## What changed during verification
 
@@ -60,4 +60,4 @@ A recruiter can see, in code and in tests:
 - **DevSecOps:** GitHub Actions runs typecheck, both test modes, Semgrep (policy + lab-coverage), npm audit (High+), Gitleaks, image build, and Trivy (Critical).
 - **AI/RAG security:** a mock retriever (no vendor LLM) with the same object-ACL class (RAG-ACL-001). Prompt injection is written up as evaluation design only.
 
-It does **not** demonstrate completed TryHackMe rooms, Burp/Nmap notes, cloud/K8s hardening, or a real-model jailbreak assessment. Those rows stay Planned until artefacts exist.
+It does **not** demonstrate Burp/Nmap notes, cloud/K8s hardening, or a real-model jailbreak assessment. TryHackMe evidence is four introductory walkthrough rooms, not a completed web/OWASP path. Those deeper rows stay Planned until artefacts exist.

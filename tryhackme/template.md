@@ -11,7 +11,7 @@ Copy this file to `notes/<room-slug>.md`. Delete the guidance in italics. Do not
 | **Room / module** | TODO: official TryHackMe title (and path, if useful) |
 | **Date** | TODO: YYYY-MM-DD (completion or last session) |
 | **Status** | Planned / In progress / **Completed** |
-| **TryHackMe profile** | TODO: `https://tryhackme.com/p/<USERNAME>` |
+| **TryHackMe profile** | [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei) |
 | **Evidence** | Completed only if the public profile shows this room and this note is dated |
 
 ## Topics
@@ -50,7 +50,7 @@ TODO: link to a lab README, report, or test file in this repository, or write â€
 
 ## Evidence / profile link
 
-- Profile: TODO: `https://tryhackme.com/p/<USERNAME>`
+- Profile: [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei)
 - Badge / room page: TODO (optional, no screenshots of answers)
 
 ## Notes to self (optional)

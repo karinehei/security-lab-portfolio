@@ -24,7 +24,7 @@ Status values:
 | Secure coding | Deny-by-default ACL; short-lived tokens | WEB-001 and WEB-002 secure implementations | Documented |
 | Regression testing | Vitest + Supertest, both lab modes | [package.json](./web-api-security/vulnerable-api/package.json) `test:all` | Documented |
 | OWASP Top 10 | API1 BOLA; A07 / API2 Broken Authentication | [WEB-001](./reports/WEB-001-broken-object-level-authorization.md); [WEB-002](./reports/WEB-002-authentication-security.md) | Documented (API1 + API2/A07) |
-| TryHackMe (platform learning) | Guided rooms on TryHackMe | [tryhackme/progress.md](./tryhackme/progress.md) — profile TODO: `https://tryhackme.com/p/<USERNAME>`; no completed rooms claimed | Planned |
+| TryHackMe (platform learning) | Guided rooms on TryHackMe | Profile [karinehei](https://tryhackme.com/p/karinehei); four intro rooms as of 20 Aug 2026; [progress.md](./tryhackme/progress.md) | Documented (introductory rooms only) |
 | Burp Suite | Intercepting proxy | TODO: local-lab note against `127.0.0.1` only | Planned |
 | Nmap | Host/port discovery | TODO: optional localhost Compose ports only | Planned |
 | Docker Security | Loopback Compose + image scan | [docker-compose.yml](./web-api-security/vulnerable-api/docker-compose.yml); [Trivy](./devsecops/trivy) | Documented (baseline + CI scan) |

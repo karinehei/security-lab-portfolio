@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karine Hei — Security Lab Portfolio</title>
+    <meta
+      name="description"
+      content="Local cybersecurity labs: API authorization, JWT sessions, RAG access control, and DevSecOps. Recently started TryHackMe training."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f3eee4;
+        --ink: #1a1814;
+        --muted: #5c564c;
+        --line: #d4cdc0;
+        --card: #fbf8f1;
+        --accent: #1f5c4d;
+        --accent-hover: #16463b;
+        --chip: #e7efe9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.55;
+        background-image: radial-gradient(#cfc6b4 0.6px, transparent 0.6px);
+        background-size: 14px 14px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      a:hover {
+        color: var(--accent-hover);
+      }
+
+      .wrap {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 1.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .kicker {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 0.6rem;
+      }
+
+      h1 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.75rem;
+        line-height: 1.15;
+      }
+
+      .lede {
+        max-width: 40rem;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      h2 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 0 0 0.85rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 720px) {
+        .grid.labs {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 1.15rem 1.2rem 1.25rem;
+      }
+
+      .card.training {
+        grid-column: 1 / -1;
+        border-color: #b7cfc6;
+        background: linear-gradient(180deg, #f7fbf8 0%, var(--card) 48%);
+      }
+
+      .label {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 0.35rem;
+      }
+
+      .card h3 {
+        margin: 0 0 0.55rem;
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        margin: 0 0 0.85rem;
+        color: var(--muted);
+      }
+
+      .card ul {
+        margin: 0 0 1rem;
+        padding-left: 1.1rem;
+        color: var(--ink);
+      }
+
+      .card li {
+        margin: 0.15rem 0;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #f7fbf8;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.92rem;
+        padding: 0.55rem 0.9rem;
+        border-radius: 4px;
+      }
+
+      .btn:hover {
+        background: var(--accent-hover);
+        color: #fff;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem 1.1rem;
+        font-size: 0.92rem;
+      }
+
+      footer {
+        margin-top: 2.25rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .note {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0.4rem 0 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="kicker">Local labs · evidence-based · no third-party targets</p>
+        <h1>Security Lab Portfolio</h1>
+        <p class="lede">
+          Software, cloud, and AI engineering background, applied to practical cybersecurity:
+          find a missing control in a lab I own, write it up, fix it, and lock it with tests and CI.
+          I recently started hands-on cybersecurity training with TryHackMe and am actively building
+          my skills through practical labs and exercises.
+        </p>
+      </header>
+
+      <section class="grid labs" aria-label="Portfolio evidence">
+        <article class="card training">
+          <p class="label">Hands-on Training</p>
+          <h2>TryHackMe</h2>
+          <p>
+            Recently started hands-on cybersecurity training and actively
+            building practical skills through labs and exercises.
+          </p>
+          <p><strong>Current focus:</strong></p>
+          <ul>
+            <li>Web application security</li>
+            <li>Penetration testing</li>
+            <li>OWASP</li>
+            <li>API security</li>
+          </ul>
+          <p class="note">
+            Snapshot: 20 August 2026 — four introductory Easy walkthrough rooms
+            (Offensive Security Intro, Defensive Security Intro, Inside a Computer System,
+            Careers in Cyber). Level <code>[0x1][NEOPHYTE]</code>. Not a claim of extensive
+            CTF or pentest experience.
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/tryhackme/progress.md">progress.md</a>
+            ·
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/tryhackme/skills-mapping.md">skills-mapping.md</a>
+          </p>
+          <a class="btn" href="https://tryhackme.com/p/karinehei">View TryHackMe Profile →</a>
+        </article>
+
+        <article class="card">
+          <p class="label">Web / API</p>
+          <h3>Broken object-level authorization</h3>
+          <p>
+            Local document API. Alice must not read Bob’s object by changing an id.
+            Vulnerable mode returns 200; secure mode returns 403.
+          </p>
+          <div class="links">
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/reports/WEB-001-broken-object-level-authorization.md">WEB-001 report</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="label">Authentication</p>
+          <h3>JWT session expiration</h3>
+          <p>
+            Passwords are bcrypt in both modes. Vulnerable tokens omit <code>exp</code>;
+            secure tokens last 15 minutes and reject expired sessions.
+          </p>
+          <div class="links">
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/reports/WEB-002-authentication-security.md">WEB-002 report</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="label">AI / RAG</p>
+          <h3>Retrieval access control</h3>
+          <p>
+            Mock RAG pipeline (no vendor LLM). Alice’s query must not retrieve Bob’s private chunk.
+          </p>
+          <div class="links">
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/ai-security-lab/scenarios/rag-access-control/README.md">RAG-ACL-001</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="label">DevSecOps</p>
+          <h3>CI security gates</h3>
+          <p>
+            Typecheck, dual-mode tests, Semgrep, npm audit, Gitleaks, image build, Trivy.
+            Not a claim of production pentests or certifications.
+          </p>
+          <div class="links">
+            <a href="https://github.com/karinehei/security-lab-portfolio/blob/main/.github/workflows/security.yml">security.yml</a>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        <p>
+          Source:
+          <a href="https://github.com/karinehei/security-lab-portfolio">github.com/karinehei/security-lab-portfolio</a>
+          · Labs bind to <code>127.0.0.1</code> only.
+        </p>
+        <p class="note">
+          This page may show a <strong>dated</strong> TryHackMe snapshot (rank, streak, room count).
+          Live values are on the profile.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

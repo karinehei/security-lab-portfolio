@@ -7,7 +7,7 @@ Placeholder track — **not completed**. Replace this with a named TryHackMe OWA
 | **Room / module** | TODO: official room title (OWASP Top 10, API Top 10, or equivalent) |
 | **Date** | TODO: YYYY-MM-DD |
 | **Status** | **Planned** |
-| **TryHackMe profile** | TODO: `https://tryhackme.com/p/<USERNAME>` |
+| **TryHackMe profile** | [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei) |
 | **Evidence** | None yet — do not treat this file as a completion |
 
 ## Topics
@@ -49,5 +49,5 @@ Treating OWASP as a bingo card without object ACL or session TTL still ships a b
 
 ## Evidence / profile link
 
-- Profile: TODO: `https://tryhackme.com/p/<USERNAME>`
+- Profile: [https://tryhackme.com/p/karinehei](https://tryhackme.com/p/karinehei)
 - This track: Planned — see [progress.md](../progress.md)
