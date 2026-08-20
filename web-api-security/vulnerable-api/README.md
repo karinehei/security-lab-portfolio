@@ -44,7 +44,7 @@ Fictional credentials, seeded by `prisma/seed.ts`. Password for every account: `
 
 Seeded documents belong to Alice, Bob, and the admin so object ids are easy to compare. Tests also create their own documents so they do not depend on a particular id.
 
-Commands below are for **WSL** (Ubuntu). From Windows, open a WSL shell first, then:
+Commands below are for **WSL** (Ubuntu). From Windows, open a WSL shell first. From the repository root, `make help` wraps the same steps; or:
 
 ```bash
 cd /mnt/d/security-lab-portfolio/web-api-security/vulnerable-api

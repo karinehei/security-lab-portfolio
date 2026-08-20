@@ -48,6 +48,8 @@ Detail: [docs/methodology.md](./docs/methodology.md). Scope: [SECURITY.md](./SEC
 
 Full inventory: [skills.md](./skills.md) (rows without artefacts stay **Planned**).
 
+From WSL at the repository root, `make help` lists install, test, Compose, and scanner targets.
+
 ---
 
 ## Safety
