@@ -1,0 +1,15 @@
+title = "security-lab-portfolio"
+
+[allowlist]
+description = "Fictional local-lab placeholders only. See devsecops/exceptions.md. Do not add live credentials."
+paths = [
+  '''(^|/)node_modules/''',
+  '''(^|/)package-lock\.json$''',
+  '''(^|/)coverage/''',
+  '''(^|/)dist/''',
+]
+regexes = [
+  '''LabPassw0rd!''',
+  '''local-lab-jwt-secret-not-for-production''',
+  '''postgresql://lab:lab@''',
+]

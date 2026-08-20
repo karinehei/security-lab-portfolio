@@ -1,0 +1,5 @@
+# Trivy ignore list
+# Format: CVE-ID (optional: expiry comment)
+# Only add IDs that have a row in devsecops/exceptions.md.
+# Example:
+# CVE-2024-0000  # EXP-TRIVY-001, revisit 2026-12-01

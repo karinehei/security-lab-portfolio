@@ -1,0 +1,121 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NODE_ENV: development
+  JWT_SECRET: local-lab-jwt-secret-not-for-production
+  DATABASE_URL: postgresql://lab:lab@localhost:5432/documents_lab
+  LAB_MODE: secure
+
+jobs:
+  security:
+    name: DevSecOps pipeline
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: lab
+          POSTGRES_PASSWORD: lab
+          POSTGRES_DB: documents_lab
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lab -d documents_lab"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            web-api-security/vulnerable-api/package-lock.json
+            ai-security-lab/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web-api-security/vulnerable-api
+        run: npm ci
+
+      - name: Generate Prisma client
+        working-directory: web-api-security/vulnerable-api
+        run: npx prisma generate
+
+      - name: TypeScript checks
+        working-directory: web-api-security/vulnerable-api
+        run: npm run typecheck
+
+      - name: Unit tests (API lab)
+        working-directory: web-api-security/vulnerable-api
+        run: |
+          npm run db:setup
+          npm run test:all
+
+      - name: Install dependencies (RAG lab)
+        working-directory: ai-security-lab
+        run: npm ci
+
+      - name: TypeScript checks (RAG lab)
+        working-directory: ai-security-lab
+        run: npm run typecheck
+
+      - name: Unit tests (RAG lab)
+        working-directory: ai-security-lab
+        run: npm run test:all
+
+      - name: Semgrep SAST (policy)
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/src" -w /src --entrypoint semgrep semgrep/semgrep:1.128.1 \
+            scan --config /src/devsecops/semgrep/policy.yaml --error --severity ERROR --metrics=off
+
+      - name: Semgrep SAST (lab coverage)
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/src" -w /src --entrypoint semgrep semgrep/semgrep:1.128.1 \
+            scan --config /src/devsecops/semgrep/lab-coverage.yaml \
+            --json -o /src/semgrep-lab.json --metrics=off
+          python3 devsecops/ci/assert-lab-sast.py semgrep-lab.json
+
+      - name: Dependency audit
+        working-directory: web-api-security/vulnerable-api
+        run: npm run audit:ci
+
+      - name: Secrets detection (Gitleaks)
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/repo" zricethezav/gitleaks:v8.24.0 \
+            detect --source /repo --config /repo/devsecops/gitleaks/gitleaks.toml --verbose
+
+      - name: Docker image build
+        run: docker build -t security-lab-api:${{ github.sha }} ./web-api-security/vulnerable-api
+
+      - name: Trivy container scan
+        uses: aquasecurity/trivy-action@0.29.0
+        with:
+          image-ref: security-lab-api:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL
+          trivyignores: devsecops/trivy/.trivyignore

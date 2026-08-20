@@ -1,0 +1,56 @@
+rules:
+  - id: security-lab.idor-skip-ownership
+    message: >
+      LAB COVERAGE (WEB-001): ownership short-circuit in vulnerable mode.
+      If this match disappears, the IDOR lab or its tests may have been removed
+      without updating reports/WEB-001 and expected-findings.md.
+    severity: INFO
+    languages: [javascript, typescript]
+    metadata:
+      cwe: "CWE-639"
+      lab-intentional: true
+      report: WEB-001
+    paths:
+      include:
+        - "**/web-api-security/vulnerable-api/src/authz/documentAuthz.ts"
+    pattern: |
+      if (isVulnerableMode()) {
+        ...
+        return true;
+      }
+
+  - id: security-lab.jwt-ignore-expiration
+    message: >
+      LAB COVERAGE (WEB-002): jwt.verify ignoreExpiration in vulnerable mode.
+      If this match disappears, the session-expiration lab may have been removed
+      without updating reports/WEB-002 and expected-findings.md.
+    severity: INFO
+    languages: [javascript, typescript]
+    metadata:
+      cwe: "CWE-613"
+      lab-intentional: true
+      report: WEB-002
+    paths:
+      include:
+        - "**/web-api-security/vulnerable-api/src/services/authService.ts"
+    pattern: "ignoreExpiration: true"
+
+  - id: security-lab.rag-skip-ownership
+    message: >
+      LAB COVERAGE (RAG-ACL-001): retrieval ownership short-circuit in vulnerable mode.
+      If this match disappears, the RAG ACL lab may have been removed without updating
+      ai-security-lab/scenarios/rag-access-control and expected-findings.md.
+    severity: INFO
+    languages: [javascript, typescript]
+    metadata:
+      cwe: "CWE-639"
+      lab-intentional: true
+      report: RAG-ACL-001
+    paths:
+      include:
+        - "**/ai-security-lab/src/acl.ts"
+    pattern: |
+      if (isVulnerableMode()) {
+        ...
+        return true;
+      }
