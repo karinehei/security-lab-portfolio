@@ -18,7 +18,8 @@ Every row needs: ID, tool, what is ignored, why, who (role), and a revisit date.
 
 | ID | Tool | What happened |
 | --- | --- | --- |
-| GHSA-ggr8-5vv4-36mx | npm audit | High in `deepmerge-ts` via Prisma ≥ 6.13. **Pinned** `prisma` and `@prisma/client` to `6.12.0` instead of adding an audit exception. |
+| GHSA-ggr8-5vv4-36mx | npm audit | High in `deepmerge-ts` via Prisma ≥ 6.13. Was pinned at Prisma 6.12.0. After the Prisma 7.9.1 upgrade, **overridden** `deepmerge-ts` to `8.0.1` (patched) so `npm run audit:ci` stays at 0 High. |
+| CVE-2026-59873 | Trivy | Critical `tar@6.2.1` in the official Node alpine image's bundled npm, not the lab lockfile. Removed global `npm`/`npx` from the image after `prisma generate`; runtime uses `node_modules/.bin/prisma` and `tsx`. |
 
 | ID | Tool | Target | Reason | Revisit |
 | --- | --- | --- | --- | --- |

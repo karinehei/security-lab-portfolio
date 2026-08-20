@@ -5,7 +5,7 @@
   "description": "Local synthetic RAG pipeline for document-level access-control training. No external LLM APIs.",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "ask": "tsx src/index.ts",

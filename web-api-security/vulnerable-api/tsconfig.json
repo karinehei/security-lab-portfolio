@@ -11,5 +11,5 @@
     "noUncheckedIndexedAccess": true,
     "types": ["node"]
   },
-  "include": ["src", "prisma", "tests", "vitest.config.ts"]
+  "include": ["src", "prisma", "tests", "vitest.config.ts", "prisma.config.ts"]
 }

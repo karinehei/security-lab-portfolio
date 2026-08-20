@@ -7,7 +7,7 @@ The live pipeline is [`.github/workflows/security.yml`](../../.github/workflows/
 On push and pull request to `main`:
 
 1. Checkout (full history for Gitleaks)
-2. Node 20 + `npm ci` in `web-api-security/vulnerable-api`
+2. Node 22 + `npm ci` in `web-api-security/vulnerable-api`
 3. API `typecheck`, Postgres, `test:all`
 4. RAG lab `npm ci`, `typecheck`, `test:all`
 5. Semgrep policy (must be clean at ERROR)
@@ -21,7 +21,7 @@ No workflow file contains live credentials. Lab placeholders match `.env.example
 
 ## Local (WSL)
 
-From the repository root, with Docker and Node 20:
+From the repository root, with Docker and Node 22:
 
 ```bash
 cd /mnt/d/security-lab-portfolio/web-api-security/vulnerable-api

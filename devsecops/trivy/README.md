@@ -12,6 +12,8 @@ Scans the **lab API image** built from `web-api-security/vulnerable-api/Dockerfi
 
 The image is a **training artefact**. It must not be pushed to a public registry.
 
+Runtime start does not use global `npx`. After `prisma generate`, the Dockerfile deletes the Node image’s bundled `npm` (that copy of `tar` is where [CVE-2026-59873](https://nvd.nist.gov/vuln/detail/CVE-2026-59873) was reported). Migrate and the API use `./node_modules/.bin/prisma` and `./node_modules/.bin/tsx`.
+
 ## CI invocation
 
 GitHub Actions runs `aquasec/trivy:0.70.0` against the image just built on the runner (`docker run` + Docker socket). That matches Semgrep and Gitleaks and avoids `aquasecurity/trivy-action@0.29.0`, which no longer resolves: Aqua removed unprefixed tags after the March 2026 tag-poisoning incident. Do not pin `trivy:0.69.4` (malicious release).

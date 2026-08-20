@@ -1,7 +1,8 @@
 import bcrypt from "bcryptjs";
-import { PrismaClient, Role } from "@prisma/client";
+import { Role } from "@prisma/client";
+import { createPrismaClient } from "../src/db.js";
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 /**
  * Fictional lab accounts only. These values are documented in the module README
